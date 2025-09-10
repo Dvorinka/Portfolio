@@ -382,7 +382,7 @@ body {
 .chip .material-symbols-outlined { font-size: 1.8rem; }
 
 .card {
-  background-color: var(--surface-container-low);
+  background-color: transparent;
   border-radius: var(--radius-medium);
   padding: 16px;
   display: grid;
@@ -672,14 +672,19 @@ body {
 .social-item { padding: 12px; }
 
 .input-wrapper {
-  margin-block-start: 16px;
+  margin-block-start: 0px;
   display: grid;
   gap: 10px;
 }
 
+/* Only add padding to the divs with inputs inside the contact form */
+#contact-form > div {
+  padding: 0px;
+}
+
 .contact-form {
   background-color: var(--surface-container);
-  padding: 16px;
+  padding: 0;
   margin-block-end: 16px;
   border-radius: var(--radius-medium);
 }
@@ -763,8 +768,8 @@ a:hover {
 .contact-form-wrapper {
   width: 100%;
   max-width: 740px;
-  margin: 16px auto 0;
-  padding: 16px;
+  margin: 0px;
+  padding: 0;
   overflow: hidden; /* clip inner focus rings/buttons to the rounded card */
 }
 
