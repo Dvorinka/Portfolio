@@ -517,9 +517,6 @@ body {
 }
 
 .resume-tab .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
   margin-block-end: 28px;
 }
 
@@ -548,6 +545,80 @@ body {
 }
 
 .resume-bottom-item .icon { height: 28px; }
+
+/* Resume Timeline */
+.resume-tab .container { align-items: center; }
+
+.resume-header {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 20px;
+}
+
+.resume-linkedin-btn {
+  border: 1px solid var(--outline);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--on-surface);
+}
+
+.timeline {
+  position: relative;
+  max-width: 780px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--outline-variant);
+  opacity: 0.6;
+}
+
+.timeline::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 0 0 28px 0;
+  padding-right: 44px; /* space for dots/line on the right */
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+  transform: translate(0, -50%);
+  z-index: 2;
+}
+
+.timeline .resume-card { background: transparent; padding: 14px 0; border-radius: 0; margin: 0; max-width: none; }
+.timeline .resume-card .body-large { font-weight: 600; }
+.timeline .resume-card .card-subtitle { color: var(--on-surface-variant); opacity: 0.9; }
+.timeline .resume-card .card-text { color: var(--on-surface-variant); opacity: 0.9; }
+
+/* Single-column layout on all sizes; no alternating */
+
+/* Narrow screens fine-tuning */
+@media (max-width: 480px) {
+  .timeline-item { padding-right: 28px; }
+  .timeline-item::before { right: -5px; top: 16px; }
+}
 
 .contact-tab { padding-block-end: 0; }
 
@@ -683,6 +754,52 @@ a:hover {
 .send-btn:active {
   background-color: #333;
   color: #fff;
+}
+
+/* Make submit button full-width by default for better mobile UX */
+.btn.send-btn { width: 100%; }
+
+/* Contact form wrapper responsive sizing */
+.contact-form-wrapper {
+  width: 100%;
+  max-width: 740px;
+  margin: 16px auto 0;
+  padding: 16px;
+  overflow: hidden; /* clip inner focus rings/buttons to the rounded card */
+}
+
+/* Contact form visual tweaks (dark theme friendly) */
+.contact-form-wrapper .label-medium {
+  color: var(--on-surface-variant);
+}
+
+.contact-form-wrapper .input-field,
+.contact-form-wrapper .textarea {
+  background-color: var(--surface-container);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form-wrapper .input-field::placeholder,
+.contact-form-wrapper .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-form-wrapper .input-field:focus,
+.contact-form-wrapper .textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08), inset 0 0 0 1px var(--primary);
+}
+
+.contact-form-wrapper .btn.send-btn {
+  background-color: #fff;
+  color: #000;
+  border-radius: 9999px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .flags {

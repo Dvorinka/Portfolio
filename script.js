@@ -8,6 +8,54 @@ if (sessionStorage.getItem("theme")) {
   $HTML.dataset.theme = "dark"; // Set the default theme to dark
 }
 
+// ===== Resume timeline duration auto-update =====
+function parseYearMonth(value) {
+  // value format: 'YYYY-MM' or 'present'
+  if (!value || value === 'present') return null;
+  const [y, m] = value.split('-').map(Number);
+  return { year: y, month: m };
+}
+
+function monthDiff(start, end) {
+  // start/end: {year, month}
+  return (end.year - start.year) * 12 + (end.month - start.month);
+}
+
+function toYearMonth(date) {
+  return { year: date.getFullYear(), month: date.getMonth() + 1 };
+}
+
+function humanizeMonthsCZ(totalMonths) {
+  if (totalMonths < 0) return '';
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  const yearStr = years === 0 ? '' : years === 1 ? '1 rok' : (years >= 2 && years <= 4) ? `${years} roky` : `${years} let`;
+  const monthStr = months === 0 ? '' : months === 1 ? '1 měsíc' : `${months} měsíců`;
+
+  if (yearStr && monthStr) return `${yearStr} ${monthStr}`;
+  return yearStr || monthStr || '0 měsíců';
+}
+
+function updateDurations() {
+  const nowYM = toYearMonth(new Date());
+  document.querySelectorAll('.duration').forEach(el => {
+    const startAttr = el.getAttribute('data-start');
+    const endAttr = el.getAttribute('data-end');
+    const startYM = parseYearMonth(startAttr);
+    const endYM = endAttr === 'present' ? nowYM : parseYearMonth(endAttr);
+    if (!startYM || !endYM) return;
+    const diff = monthDiff(startYM, endYM);
+    el.textContent = humanizeMonthsCZ(diff);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateDurations();
+  // refresh once a day to keep counters accurate as months roll
+  setInterval(updateDurations, 24 * 60 * 60 * 1000);
+});
+
 const changeTheme = () => {
   $HTML.dataset.theme = sessionStorage.getItem("theme") === "dark";
   sessionStorage.setItem("theme", $HTML.dataset.theme);
@@ -120,3 +168,49 @@ function sendEmail() {
     console.log('FAILED...', error);
   });
 }
+
+// ===== Contact form submission =====
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Contact form submission
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.innerHTML;
+      
+      try {
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.innerHTML = 'Odesílám...';
+        }
+
+        const data = Object.fromEntries(new FormData(form));
+        const params = new URLSearchParams(data);
+        // Preserve existing query string too
+        const existing = window.location.search.replace(/^\?/, '');
+        const url = 'https://sendmail.tdvorak.dev/send' + (existing ? ('?' + existing + '&' + params.toString()) : ('?' + params.toString()));
+
+        const res = await fetch(url, { method: 'GET' });
+        const text = await res.text();
+
+        if (res.ok) {
+          alert('Děkujeme za vaši zprávu! Brzy se vám ozveme zpět.');
+          form.reset();
+        } else {
+          throw new Error(text || 'Něco se pokazilo. Zkuste to prosím znovu.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'Při odesílání zprávy došlo k chybě. Zkuste to prosím znovu později.');
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonText;
+        }
+      }
+    });
+  }
+});
