@@ -382,7 +382,7 @@ body {
 .chip .material-symbols-outlined { font-size: 1.8rem; }
 
 .card {
-  background-color: transparent;
+  background-color: #1d1d1d;
   border-radius: var(--radius-medium);
   padding: 16px;
   display: grid;
@@ -770,6 +770,7 @@ a:hover {
   max-width: 740px;
   margin: 0px;
   padding: 0;
+  background-color: transparent;
   overflow: hidden; /* clip inner focus rings/buttons to the rounded card */
 }
 
