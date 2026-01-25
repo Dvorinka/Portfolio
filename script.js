@@ -25,16 +25,16 @@ function toYearMonth(date) {
   return { year: date.getFullYear(), month: date.getMonth() + 1 };
 }
 
-function humanizeMonthsCZ(totalMonths) {
+function humanizeMonthsEN(totalMonths) {
   if (totalMonths < 0) return '';
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
-  const yearStr = years === 0 ? '' : years === 1 ? '1 rok' : (years >= 2 && years <= 4) ? `${years} roky` : `${years} let`;
-  const monthStr = months === 0 ? '' : months === 1 ? '1 měsíc' : `${months} měsíců`;
+  const yearStr = years === 0 ? '' : years === 1 ? '1 year' : `${years} years`;
+  const monthStr = months === 0 ? '' : months === 1 ? '1 month' : `${months} months`;
 
   if (yearStr && monthStr) return `${yearStr} ${monthStr}`;
-  return yearStr || monthStr || '0 měsíců';
+  return yearStr || monthStr || '0 months';
 }
 
 function updateDurations() {
@@ -46,12 +46,22 @@ function updateDurations() {
     const endYM = endAttr === 'present' ? nowYM : parseYearMonth(endAttr);
     if (!startYM || !endYM) return;
     const diff = monthDiff(startYM, endYM);
-    el.textContent = humanizeMonthsCZ(diff);
+    el.textContent = humanizeMonthsEN(diff);
   });
+}
+
+// Update footer copyright with current year
+function updateFooterCopyright() {
+  const currentYear = new Date().getFullYear();
+  const footerText = document.querySelector('.footer p.body-medium');
+  if (footerText) {
+    footerText.innerHTML = `Copyright ${currentYear}. All rights reserved by <b><a href="https://tdvorak.dev">TDvorak.</a></b>`;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   updateDurations();
+  updateFooterCopyright();
   // refresh once a day to keep counters accurate as months roll
   setInterval(updateDurations, 24 * 60 * 60 * 1000);
 });

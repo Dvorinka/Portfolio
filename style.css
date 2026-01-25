@@ -850,3 +850,312 @@ a:hover {
   width: 50%;
   padding: 10px 0px 40px;
 }
+
+/* Enhanced Modern Resume Styling */
+.resume-tab .section-title {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.resume-tab .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary) 0%, transparent 100%);
+  opacity: 0.3;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 0 0 32px 0;
+  padding-right: 44px;
+  transition: transform 0.2s ease;
+}
+
+.timeline-item:hover {
+  transform: translateX(-2px);
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  background: var(--surface-container);
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover::before {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.timeline .resume-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-medium);
+  padding: 24px;
+  margin: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline .resume-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.timeline .resume-card:hover::before {
+  opacity: 1;
+}
+
+.timeline .resume-card:hover {
+  background: var(--surface-container);
+  border-color: var(--primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.timeline .resume-card .body-large {
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.timeline .resume-card .card-subtitle {
+  color: var(--primary);
+  opacity: 0.9;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline .resume-card .card-text {
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.timeline .resume-card .card-text br {
+  content: '';
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Education Section Enhancements - Different from Work Experience */
+.resume-tab .list:not(.timeline) {
+  display: grid;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto 32px;
+}
+
+.resume-tab .list:not(.timeline) .resume-item {
+  background-color: var(--surface-container);
+  border: none;
+  border-radius: var(--radius-small);
+  padding: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.resume-tab .list:not(.timeline) .resume-item:hover {
+  background-color: var(--surface-container-low);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px) scale(1.01);
+}
+
+.resume-tab .list:not(.timeline) .resume-card {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.resume-tab .list:not(.timeline) .resume-card .body-large {
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: 6px;
+  line-height: 1.2;
+  font-size: 1.7rem;
+}
+
+.resume-tab .list:not(.timeline) .resume-card .card-subtitle {
+  color: var(--primary);
+  opacity: 1;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.resume-tab .list:not(.timeline) .resume-card .card-text {
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+  font-size: 1.3rem;
+}
+
+.resume-tab .list:not(.timeline) .resume-card .card-text br {
+  content: '';
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Responsive improvements */
+.timeline .resume-card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-medium);
+  padding: 24px;
+  margin: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline .resume-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.timeline .resume-card:hover::before {
+  opacity: 1;
+}
+
+.timeline .resume-card:hover {
+  background: var(--surface-container);
+  border-color: var(--primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.timeline .resume-card .body-large {
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.timeline .resume-card .card-subtitle {
+  color: var(--primary);
+  opacity: 0.9;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline .resume-card .card-text {
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.timeline .resume-card .card-text br {
+  content: '';
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .timeline {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  
+  .timeline-item {
+    padding-right: 32px;
+    margin-bottom: 24px;
+  }
+  
+  .timeline .resume-card {
+    padding: 20px;
+  }
+  
+  .resume-tab .list:not(.timeline) {
+    padding: 0 16px;
+  }
+  
+  .resume-tab .list:not(.timeline) .resume-item {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-item { 
+    padding-right: 28px; 
+    margin-bottom: 20px;
+  }
+  
+  .timeline-item::before { 
+    right: -5px; 
+    top: 16px; 
+  }
+  
+  .timeline .resume-card {
+    padding: 16px;
+  }
+  
+  .resume-tab .list:not(.timeline) .resume-item {
+    padding: 16px;
+  }
+  
+  .resume-tab .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+  }
+}
