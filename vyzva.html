@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webová stránka dočasně nedostupná | Nezaplacená faktura</title>
+  <meta name="description" content="Tato webová stránka je dočasně nedostupná z důvodu nezaplacené faktury">
+  <link rel="shortcut icon" href="icon.png" type="logo">
+  <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&family=Open+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    :root {
+      --background-dark: #111111;
+      --on-background-dark: hsl(0, 0%, 100%);
+      --surface-dark: #111111;
+      --on-surface-dark: hsl(0, 0%, 100%);
+      --on-surface-variant-dark: hsl(0, 0%, 100%);
+      --surface-container-low-dark: #1d1d1d;
+      --surface-container-dark: rgb(19, 19, 19);
+      --surface-bright-dark: hsl(0, 85%, 3%);
+      --primary-dark: hsl(0, 0%, 100%);
+      --on-primary-dark: #202020;
+      --outline-dark: hsl(0, 0%, 100%);
+      --outline-variant-dark: hsl(0, 0%, 73%);
+
+      --font-primary: 'Open Sans', sans-serif;
+      --font-secondary: 'Noto Sans', sans-serif;
+
+      --base-font-size: 62.5%;
+      --display-large: 5.7rem;
+      --display-medium: 4.5rem;
+      --display-small: 3.6rem;
+      --headline-large: 3.2rem;
+      --headline-medium: 2.8rem;
+      --headline-small: 2.4rem;
+      --title-large: 2rem;
+      --title-medium: 1.6rem;
+      --title-small: 1.4rem;
+      --label-large: 1.4rem;
+      --label-medium: 1.2rem;
+      --label-small: 1.1rem;
+      --body-large: 1.6rem;
+      --body-medium: 1.4rem;
+      --body-small: 1.2rem;
+
+      --weight-regular: 400;
+      --weight-medium: 500;
+
+      --radius-extra-small: 4px;
+      --radius-small: 8px;
+      --radius-medium: 12px;
+      --radius-large: 16px;
+      --radius-full: 500px;
+      --radius-circle: 50%;
+
+      --elevation-1: 0px 1px 3px 1px #00000026, 0px 1px 2px 0px #0000004d;
+
+      --section-padding: 24px;
+      --top-bar-height: 64px;
+      --container-padding: 32px;
+
+      --motion-duration-short-1: 100ms;
+      --motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --background: var(--background-dark);
+      --on-background: var(--on-background-dark);
+      --surface: var(--surface-dark);
+      --on-surface: var(--on-surface-dark);
+      --on-surface-variant: var(--on-surface-variant-dark);
+      --surface-container-low: var(--surface-container-low-dark);
+      --surface-container: var(--surface-container-dark);
+      --surface-bright: var(--surface-bright-dark);
+      --primary: var(--primary-dark);
+      --on-primary: var(--on-primary-dark);
+      --outline: var(--outline-dark);
+      --outline-variant: var(--outline-variant-dark);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    li { list-style: none; }
+
+    a,
+    img,
+    span,
+    input,
+    button,
+    textarea { display: block; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img { height: auto; }
+
+    input,
+    button,
+    textarea {
+      background: none;
+      border: none;
+      font: inherit;
+    }
+
+    input,
+    textarea { width: 100%; }
+
+    button { cursor: pointer; }
+
+    textarea { resize: none; }
+
+    html {
+      font-family: var(--font-secondary);
+      font-size: var(--base-font-size);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--on-background);
+      font-size: var(--body-large);
+    }
+
+    .label-large {
+      font-size: var(--label-large);
+      font-weight: var(--weight-medium);
+      line-height: 20px;
+      letter-spacing: 0.1px;
+    }
+
+    .label-medium {
+      font-size: var(--label-medium);
+      font-weight: var(--weight-medium);
+      line-height: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .material-symbols-outlined {
+      width: 1em;
+      height: 1em;
+      display: block;
+      font-variation-settings: 
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+    }
+
+    :has(> .state-layer) {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .state-layer {
+      position: absolute;
+      inset: 0;
+      background-color: var(--state-layer-bg);
+      transition: var(--motion-duration-short-1) var(--motion-easing-linear);
+      opacity: 0;
+    }
+
+    :has(> .state-layer):hover .state-layer { opacity: 0.08; }
+
+    :has(> .state-layer):is(:focus, :focus-visible, :active) .state-layer {
+      opacity: 0.12;
+    }
+
+    .section { padding-block: var(--section-padding); }
+
+    .container { 
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+    }
+
+    .chip {
+      height: 32px;
+      max-width: max-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding-inline: 16px;
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-small);
+      background-color: var(--surface);
+      color: var(--on-surface-variant);
+      --state-layer-bg: var(--on-surface-variant);
+    }
+
+    .chip .material-symbols-outlined { font-size: 1.8rem; }
+
+    .topbar {
+      background-color: var(--background);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--top-bar-height);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-inline: var(--container-padding);
+      z-index: 4;
+    }
+
+    [data-theme="dark"] .logo .light,
+    [data-theme="light"] .logo .dark { display: none; }
+
+    [data-theme="dark"] .logo .dark,
+    [data-theme="light"] .logo .light { display: block; }
+
+    .theme-btn {
+      color: var(--on-surface-variant);
+      --state-layer-bg: var(--on-surface-variant);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] .theme-btn .dark,
+    [data-theme="light"] .theme-btn .light { display: none; }
+
+    .hero { padding-block-start: calc(var(--top-bar-height) + 24px); }
+
+    .about-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Content sections - všechny mají stejnou šířku */
+    .content-section {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .warning-container {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      border-radius: var(--radius-large);
+      padding: 48px 32px;
+      text-align: center;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+    }
+    
+    .warning-icon {
+      font-size: 5rem;
+      color: #fff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .warning-title {
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .warning-message {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      line-height: 1.5;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .client-info {
+      background: rgba(29, 29, 29, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-medium);
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .client-info h3 {
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+    
+    .client-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    
+    .client-detail:last-child {
+      border-bottom: none;
+    }
+    
+    .client-label {
+      color: var(--on-surface-variant);
+      font-weight: 500;
+    }
+    
+    .client-value {
+      color: var(--on-surface);
+      font-weight: 600;
+      text-align: right;
+    }
+    
+    .overdue {
+      color: #dc2626;
+      font-weight: 700;
+    }
+    
+    .contact-section {
+      background: rgba(19, 19, 19, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-medium);
+      padding: 24px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .contact-title {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+    
+    .contact-message {
+      color: var(--on-surface-variant);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .payment-btn {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: white;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(22, 163, 74, 0.2);
+      min-width: 180px;
+    }
+    
+    .payment-btn:hover {
+      background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+      transform: translateY(-1px);
+    }
+    
+    .payment-btn .material-symbols-outlined {
+      font-size: 1.2rem;
+    }
+    
+    .payment-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+    
+    .info-grid {
+      display: grid;
+      gap: 24px;
+      width: 100%;
+    }
+    
+    .footer-warning {
+      background: rgba(29, 29, 29, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 16px var(--container-padding);
+      text-align: center;
+      color: var(--on-surface-variant);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+
+    .footer-warning .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .list-content {
+      color: var(--on-surface-variant);
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+
+    .list-content li {
+      list-style: disc;
+      margin-bottom: 4px;
+    }
+
+    .provider-name {
+      color: var(--on-surface);
+      margin-bottom: 16px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Tablet devices (768px - 1023px) */
+    @media (min-width: 768px) {
+      .payment-grid {
+        flex-direction: row;
+        justify-content: center;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+    }
+
+    /* Desktop devices (1024px and up) */
+    @media (min-width: 1024px) {
+      .info-grid {
+        grid-template-columns: 2fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* Mobile devices (max 767px) */
+    @media (max-width: 767px) {
+      :root {
+        --container-padding: 16px;
+        --top-bar-height: 56px;
+      }
+
+      .topbar {
+        padding-inline: var(--container-padding);
+      }
+
+      .topbar .chip {
+        display: none;
+      }
+      
+      .warning-container {
+        padding: 32px 20px;
+      }
+      
+      .warning-title {
+        font-size: 1.8rem;
+        line-height: 1.3;
+      }
+      
+      .warning-message {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+      
+      .warning-icon {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+      }
+      
+      .client-info {
+        padding: 20px;
+      }
+
+      .client-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .client-value {
+        text-align: left;
+      }
+      
+      .contact-section {
+        padding: 20px;
+      }
+      
+      .contact-title {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+      }
+      
+      .contact-message {
+        font-size: 1rem;
+        margin-bottom: 16px;
+      }
+      
+      .payment-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+        min-width: 140px;
+      }
+      
+      .payment-btn .material-symbols-outlined {
+        font-size: 1rem;
+      }
+
+      .content-section {
+        margin-bottom: 16px;
+      }
+
+      .info-grid {
+        gap: 16px;
+      }
+    }
+
+    /* Small mobile devices (max 480px) */
+    @media (max-width: 480px) {
+      :root {
+        --container-padding: 12px;
+      }
+
+      .warning-title {
+        font-size: 1.5rem;
+      }
+
+      .warning-message {
+        font-size: 1rem;
+      }
+
+      .payment-grid {
+        gap: 12px;
+      }
+
+      .logo img {
+        width: 120px;
+        height: auto;
+      }
+    }
+
+    /* Large screens (1440px and up) */
+    @media (min-width: 1440px) {
+      :root {
+        --container-padding: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="https://tdvorak.dev/" class="logo">
+      <img src="images/Logo_dark.png" alt="Tomáš Dvořák" width="145" height="32" class="dark">
+    </a>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="mailto:info@tdvorak.dev" class="chip" style="background: var(--surface-container); border: 1px solid var(--outline);">
+        <span class="material-symbols-outlined" aria-hidden="true"> mail </span>
+        <span class="label-large">info@tdvorak.dev</span>
+        <div class="state-layer"></div>
+      </a>
+      <button class="icon-btn theme-btn" data-theme-btn>
+        <div class="state-layer"></div>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero">
+      <div class="container">
+        <!-- Webová stránka nefunkční -->
+        <div class="content-section">
+          <div class="warning-container">
+            <span class="material-symbols-outlined warning-icon">warning</span>
+            <h1 class="warning-title">WEBOVÁ STRÁNKA DOČASNĚ NEFUNKČNÍ</h1>
+            <p class="warning-message">
+              Tato webová stránka je dočasně nedostupná z důvodu nezaplacené faktury. 
+              Služby budou obnoveny okamžitě po úhradě dlužné částky.
+            </p>
+          </div>
+        </div>
+
+        <!-- Informace o dlužné platbě -->
+        <div class="content-section">
+          <div class="client-info">
+            <h3>Informace o dlužné platbě</h3>
+            <div class="client-detail">
+              <span class="client-label">Doména:</span>
+              <span class="client-value" id="clientDomain">Načítání...</span>
+            </div>
+            <div class="client-detail">
+              <span class="client-label">Datum splatnosti:</span>
+              <span class="client-value" id="dueDate">Načítání...</span>
+            </div>
+            <div class="client-detail">
+              <span class="client-label">Stav platby:</span>
+              <span class="client-value overdue">NEZAPLACENO</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Okamžitá obnova služeb -->
+        <div class="content-section">
+          <div class="contact-section">
+            <h2 class="contact-title">Okamžitá obnova služeb</h2>
+            <p class="contact-message">
+              Pro okamžitou obnovu webové stránky prosím proveďte platbu co nejdříve. 
+              Po úhradě bude stránka automaticky obnovena do 15 minut.
+            </p>
+            <div class="payment-grid">
+              <a href="mailto:info@tdvorak.dev?subject=Nezaplacená faktura - Doména: [DOMÉNA]&body=Dobrý den,%0D%0A%0D%0ARád bych okamžitě uhradil nezaplacenou fakturu pro doménu [DOMÉNA].%0D%0A%0D%0ADěkuji" class="payment-btn">
+                <span class="material-symbols-outlined">mail</span>
+                <span>Kontaktovat pro platbu</span>
+              </a>
+              <a href="#" id="onlinePayment" class="payment-btn" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); display: none;">
+                <span class="material-symbols-outlined">payments</span>
+                <span>Zaplatit online</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid: Důsledky a Poskytovatel -->
+        <div class="content-section">
+          <div class="info-grid">
+            <div class="client-info">
+              <h3>Důsledky nezaplacení</h3>
+              <ul class="list-content">
+                <li>Webová stránka zůstane nedostupná</li>
+                <li>Všechny služby jsou pozastaveny</li>
+                <li>Data mohou být smazána po 30 dnech</li>
+                <li>Obnova po smazání bude zpoplatněna</li>
+                <li>Možné smluvní pokuty a poplatky</li>
+              </ul>
+            </div>
+            
+            <div class="client-info">
+              <h3>O poskytovateli služeb</h3>
+              <p class="provider-name">Tomáš Dvořák</p>
+              <div class="about-list">
+                <div class="list-item">
+                  <span class="material-symbols-outlined" aria-hidden="true"> business_center </span>
+                  <span class="label-medium">IČO: 24330621</span>
+                </div>
+                <div class="list-item">
+                  <span class="material-symbols-outlined" aria-hidden="true"> mark_email_unread </span>
+                  <span class="label-medium">Datová schránka: zhecn8k</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-warning">
+    <div class="container">
+      <p>© 2026 Tomáš Dvořák | IČO: 24330621 | Datová schránka: zhecn8k</p>
+    </div>
+  </footer>
+
+  <script>
+    // Získání URL parametrů
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Formátování data
+    function formatDate(dateString) {
+      if (!dateString) return 'Není uvedeno';
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('cs-CZ', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      } catch (e) {
+        return dateString;
+      }
+    }
+
+    // Spočítání dnu od data splatnosti
+    function getDaysOverdue(dueDate) {
+      if (!dueDate) return 0;
+      try {
+        const due = new Date(dueDate);
+        const today = new Date();
+        today.setHours(12, 0, 0, 0);
+        due.setHours(12, 0, 0, 0);
+        const diffTime = today - due;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+      } catch (e) {
+        return 0;
+      }
+    }
+
+    // Hlavní funkce
+    document.addEventListener('DOMContentLoaded', function() {
+      const domain = getUrlParameter('domain') || getUrlParameter('domena') || 'Neznámá doména';
+      const datum = getUrlParameter('datum') || getUrlParameter('date') || '';
+      const payment = getUrlParameter('payment') || '';
+      
+      // Aktualizace informací o klientovi
+      document.getElementById('clientDomain').textContent = domain;
+      document.getElementById('dueDate').textContent = formatDate(datum);
+      
+      // Přidání počtu dní po splatnosti
+      if (datum) {
+        const daysOverdue = getDaysOverdue(datum);
+        if (daysOverdue > 0) {
+          const dueDateEl = document.getElementById('dueDate');
+          dueDateEl.innerHTML = `${formatDate(datum)} <span style="color: #dc2626;">(${daysOverdue} dní po splatnosti)</span>`;
+        }
+      }
+      
+      // Zobrazení online platebního tlačítka
+      if (payment) {
+        const onlineBtn = document.getElementById('onlinePayment');
+        onlineBtn.style.display = 'flex';
+        onlineBtn.setAttribute('href', payment);
+      }
+      
+      // Aktualizace email odkazu
+      const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+      emailLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        link.setAttribute('href', href.replace('[DOMÉNA]', domain));
+      });
+    });
+
+    // Theme toggle
+    const themeBtn = document.querySelector('[data-theme-btn]');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    }
+
+    // Načtení uloženého tématu
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
