@@ -388,9 +388,40 @@ body {
   display: grid;
   gap: 16px;
   --state-layer-bg: var(--on-surface);
+  position: relative;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-style: dashed solid;
+  border-color: var(--outline-variant);
 }
 
 .card-banner { border-radius: var(--radius-medium); }
+
+/* Year badge styling for project cards */
+.card::before {
+  content: attr(data-year);
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #333;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 2;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
 
 .card-content {
   display: grid;
@@ -542,9 +573,50 @@ body {
   gap: 8px;
   padding: 12px;
   border-radius: var(--radius-small);
+  position: relative;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.resume-bottom-item:hover {
+  border-style: dashed solid;
+  border-color: var(--outline-variant);
 }
 
 .resume-bottom-item .icon { height: 28px; }
+
+/* Year badge styling for skill items */
+.resume-bottom-item::before {
+  content: attr(data-year);
+  position: absolute;
+  top: -10px;
+  right: 8px;
+  background-color: white;
+  color: #333;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.resume-bottom-item:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide hover effects for In Progress section */
+.resume-tab h2:nth-of-type(4) + .resume-bottom-list .resume-bottom-item {
+  border: 2px solid transparent !important;
+}
+
+.resume-tab h2:nth-of-type(4) + .resume-bottom-list .resume-bottom-item::before {
+  display: none !important;
+}
 
 /* Resume Timeline */
 .resume-tab .container { align-items: center; }
