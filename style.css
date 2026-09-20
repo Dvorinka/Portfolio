@@ -186,6 +186,8 @@ a { color: inherit; text-decoration: none; }
 .row .arrow { color: var(--fg-faint); flex-shrink: 0; transition: transform 0.15s, color 0.15s; }
 .row:hover .arrow { transform: translate(1px, -1px); color: var(--fg); }
 .row-static { cursor: default; }
+.sub-label { margin-top: 48px; }
+.row-list-tight { margin-top: 16px; }
 
 /* ============ Timeline ============ */
 .timeline { margin-top: 40px; list-style: none; }
