@@ -208,7 +208,20 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono); font-size: 11px; color: var(--fg-dim);
   padding: 3px 8px; border: 1px solid var(--border); border-radius: 999px;
 }
-.tag-lime { color: #a3e635; border-color: rgba(163, 230, 53, 0.35); }
+/* brand accent tags — color sampled from each product's own UI */
+.tag-lime { --acc: #a3e635; }            /* containr */
+.tag-nothing { --acc: #f04e55; }         /* nothing red */
+.tag-cal { --acc: #7da88b; }             /* sage */
+.tag-pulse { --acc: #5eb3ff; }           /* monitor blue */
+.tag-bookra { --acc: #d8b98a; }          /* warm tan */
+.tag-vibly { --acc: #b8ff2e; }           /* chartreuse */
+.tag-silver { --acc: #c9cdd3; }          /* timespent mono */
+.tag-sportcreative { --acc: #9a7ae0; }   /* purple */
+.tag-zeus { --acc: #e05a52; }            /* red */
+.tag-reklik { --acc: #58aed8; }          /* blue */
+.tag-bizoni { --acc: #c05b50; }          /* maroon */
+.tag[class*="tag-"] { color: var(--acc); border-color: color-mix(in srgb, var(--acc) 35%, transparent); }
+[data-theme="light"] .tag[class*="tag-"] { color: color-mix(in srgb, var(--acc) 45%, #000); border-color: color-mix(in srgb, var(--acc) 50%, transparent); }
 .card-body > p { margin-top: 8px; font-size: 14px; color: var(--fg-dim); line-height: 1.55; }
 
 /* ============ Row lists ============ */
