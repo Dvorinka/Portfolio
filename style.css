@@ -68,8 +68,8 @@ a { color: inherit; text-decoration: none; }
   max-width: var(--max-w); height: 100%; margin: 0 auto; padding: 0 24px;
   display: flex; align-items: center; gap: 32px;
 }
-.nav-logo img { height: 18px; width: auto; }
-[data-theme="light"] .nav-logo img { filter: invert(1); }
+.nav-logo img { height: 20px; width: auto; }
+[data-theme="dark"] .nav-logo img { filter: invert(1); }
 .nav-links { display: flex; gap: 24px; flex: 1; }
 .nav-links a { font-size: 14px; color: var(--fg-dim); transition: color 0.15s; }
 .nav-links a:hover { color: var(--fg); }
