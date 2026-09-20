@@ -1,5 +1,7 @@
 "use strict";
 
+document.documentElement.classList.add("js");
+
 // Theme: persisted in sessionStorage, dark default.
 const root = document.documentElement;
 root.dataset.theme = sessionStorage.getItem("theme") || "dark";
@@ -11,6 +13,28 @@ document.querySelector("[data-theme-btn]")?.addEventListener("click", () => {
 
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Card spotlight: track cursor into --mx/--my
+for (const card of document.querySelectorAll(".card")) {
+  card.addEventListener("mousemove", (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  });
+}
+
+// Staggered reveal on scroll
+const reveal = new IntersectionObserver((entries) => {
+  for (const en of entries) {
+    if (en.isIntersecting) {
+      const cards = [...en.target.parentElement.children];
+      en.target.style.transitionDelay = `${cards.indexOf(en.target) * 60}ms`;
+      en.target.classList.add("in");
+      reveal.unobserve(en.target);
+    }
+  }
+}, { threshold: 0.15 });
+document.querySelectorAll(".card").forEach((c) => reveal.observe(c));
 
 // Contact form -> sendmail.tdvorak.dev
 const form = document.getElementById("contact-form");
